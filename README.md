@@ -1,1 +1,1 @@
-# quiz-app
+# A basic quiz app build using NextJS
