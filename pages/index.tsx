@@ -1,51 +1,35 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
-import { createClient } from 'contentful'
+import {
+  getListOfQuizzes,
+  ListOfQuizzesResponse
+} from '../utils/contentfulApiCalls'
+import QuizzesI from '../types/Quizzes'
 
 interface Props {
-  quizzes: object
-}
-
-interface QuizzesI {
-  id: string
-  name: string
-  description: string
-  slug: string
+  quizzes: QuizzesI
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const space = process.env.CONTENTFUL_SPACE_ID as string
-  const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN as string
-  const client = createClient({
-    space,
-    accessToken
-  })
-
-  const response = await client.getEntries({ content_type: 'quizDetails' })
-  const { items } = response
-  const quizzes: QuizzesI[] = items.map((item) => {
-    const fields = item.fields as QuizzesI
-    const sys = item.sys
+  const quizzes: ListOfQuizzesResponse = await getListOfQuizzes()
+  if (quizzes.type === 'ERROR') {
     return {
-      ...fields,
-      id: sys.id
+      redirect: {
+        destination: '/error',
+        permanent: false
+      }
     }
-  })
-
+  }
   return {
     props: {
-      quizzes
+      quizzes: quizzes.data
     }
   }
 }
 
 const Home: React.FC<Props> = ({ quizzes }) => {
   console.log('props:', quizzes)
-  return (
-    <main>
-      {JSON.stringify(quizzes)}
-    </main>
-  )
+  return <main>{JSON.stringify(quizzes)}</main>
 }
 
 export default Home
