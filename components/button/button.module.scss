@@ -1,0 +1,14 @@
+@use '/styles/variables' as v;
+
+.primary {
+  background-color: v.$primary-color;
+}
+
+.secondary {
+  background-color: v.$secondary-color;
+}
+
+.outlined {
+  background-color: white;
+  border: 1px solid black;
+}

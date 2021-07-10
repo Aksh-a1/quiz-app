@@ -1,35 +1,15 @@
 import React from 'react'
-import { GetStaticProps } from 'next'
-import {
-  getListOfQuizzes,
-  ListOfQuizzesResponse
-} from '../utils/contentfulApiCalls'
-import QuizzesI from '../types/Quizzes'
+import { useRouter } from 'next/router'
+import Button from '../components/button'
 
-interface Props {
-  quizzes: QuizzesI
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const quizzes: ListOfQuizzesResponse = await getListOfQuizzes()
-  if (quizzes.type === 'ERROR') {
-    return {
-      redirect: {
-        destination: '/error',
-        permanent: false
-      }
-    }
-  }
-  return {
-    props: {
-      quizzes: quizzes.data
-    }
-  }
-}
-
-const Home: React.FC<Props> = ({ quizzes }) => {
-  console.log('props:', quizzes)
-  return <main>{JSON.stringify(quizzes)}</main>
+const Home: React.FC = () => {
+  const router = useRouter()
+  const onClick = React.useCallback(()=> router.push('/quizzes'),[])
+  return (
+    <div>
+      <Button onClick={onClick} text={'Explore all quizzes!'}/>
+    </div>
+  )
 }
 
 export default Home
