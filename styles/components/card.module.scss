@@ -1,0 +1,38 @@
+@use '../common/variables' as v;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  min-height: 250px;
+  border: v.$spacing/2 solid black;
+  border-radius: v.$spacing/2;
+}
+
+.title {
+  align-items: center;
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: row;
+  min-height: 50px;
+  padding: v.$spacing;
+}
+
+.content {
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  min-height: 150px;
+  padding: v.$spacing;
+  overflow-wrap: break-word;
+}
+
+.actions {
+  align-items: center;
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: row;
+  min-height: 50px;
+  padding: v.$spacing;
+}

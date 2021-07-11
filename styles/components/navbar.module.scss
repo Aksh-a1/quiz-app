@@ -1,0 +1,14 @@
+@use '../common/variables' as v;
+
+.navbar {
+  display: flex;
+  background-color: aqua;
+  align-items: center;
+  width: 100%;
+}
+
+.text {
+  margin: 0;
+  font-size: v.$text-large;
+  margin-left: v.$spacing * 2;
+}

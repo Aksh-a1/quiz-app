@@ -6,6 +6,7 @@ import {
   ListOfQuizzesResponse
 } from '../utils/contentfulApiCalls'
 import QuizzesI from '../types/Quizzes'
+import styles from '../styles/pages/Quizzes.module.scss'
 
 interface Props {
   quizzes: QuizzesI[]
@@ -30,7 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Quizzes: React.FC<Props> = ({ quizzes }) => {
   return (
-    <div>
+    <div className={styles.grid}>
       {quizzes.map((quiz) => (
         <Card title={quiz.name} description={quiz.description} key={quiz.id} />
       ))}

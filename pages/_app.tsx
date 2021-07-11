@@ -1,10 +1,13 @@
-import '../styles/globals.scss'
 import Head from 'next/head'
-import styles from '../styles/Home.module.scss'
+import { useRouter } from 'next/router'
+import styles from '../styles/pages/Home.module.scss'
 import type { AppProps } from 'next/app'
 import AppFooter from '../components/appFooter'
+import Navbar from '../components/navbar'
+import '../styles/globals.scss'
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter()
   return (
     <div className={styles.container}>
       <Head>
@@ -12,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name='description' content='Multiple Online Quizzes' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      {router.pathname !== '/' && <Navbar />}
       <Component {...pageProps} />
       <AppFooter />
     </div>
